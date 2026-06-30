@@ -1,9 +1,10 @@
-package com.hakimi.aviation.util;
+package edu.cauc.cabin.util;
 
+
+import edu.cauc.cabin.model.entity.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import com.hakimi.aviation.entity.User;
 
 import java.util.Date;
 
@@ -42,9 +43,9 @@ public class JWTUtils {
     public static String generateJsonWebToken(User user){
 
         String token = Jwts.builder().setSubject(SUBJECT)
-                .claim("head_img", user.getAvatar())
+                .claim("account", user.getAccount())
                 .claim("id", user.getId())
-                .claim("name", user.getUserName())
+                .claim("name", user.getName())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRE) )
                 .signWith(SignatureAlgorithm.HS256, SECRET).compact();
